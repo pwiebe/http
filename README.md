@@ -45,10 +45,10 @@ Let's start with getting things:
 ```
 
 That's it! The result is the response body as a string. To obtain an Http::Response object
-instead of the response body, chain `.response` on the end of the request:
+instead of the response body, chain `.with_response(:object)` before the `get` of the request:
 
 ```ruby
->> Http.get("http://www.google.com").response
+>> Http.with_response(:object).get("http://www.google.com")
 => #<HTTP/1.0 200 OK @headers={"Content-Type"=>"text/html; charset=UTF-8", "Date"=>"Fri, ...>
 ```
 

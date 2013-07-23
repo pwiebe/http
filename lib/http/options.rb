@@ -49,7 +49,7 @@ module HTTP
       @response  = options[:response]  || :auto
       @headers   = options[:headers]   || {}
       @proxy     = options[:proxy]     || {}
-      @callbacks = options[:callbacks] || {:request => [], :response => []}
+      @callbacks = options[:callbacks] || {:request => [], :response => [], :connect => []}
       @body      = options[:body]
       @form      = options[:form]
       @follow    = options[:follow]
@@ -110,7 +110,7 @@ module HTTP
       unless callback.respond_to?(:arity) and callback.arity == 1
         argument_error! "callback must accept only one argument"
       end
-      unless [:request, :response].include?(event)
+      unless [:request, :response, :connect].include?(event)
         argument_error! "invalid callback event: #{event}"
       end
       dup do |opts|

@@ -62,6 +62,8 @@ module HTTP
       uri, proxy = request.uri, request.proxy
       socket = options[:socket_class].open(uri.host, uri.port) # TODO: proxy support
 
+      options.callbacks[:connect].each { |c| c.call(socket)}
+
       if uri.is_a?(URI::HTTPS)
         if options[:ssl_context] == nil
           context = OpenSSL::SSL::SSLContext.new
